@@ -42,13 +42,13 @@ contents = CSV.open(
 template_letter = File.read('form_letter.erb')
 erb_template = ERB.new template_letter
 
-contents.each do |row|
-  id = row[0]
-  name = row[:first_name]
-  zipcode = clean_zipcode(row[:zipcode])
-  legislators = legislators_by_zipcode(zipcode)
+contents.each do |row| #commented shit out so its faster when i do assignments
+  #id = row[0]
+  #name = row[:first_name]
+  #zipcode = clean_zipcode(row[:zipcode])
+  #legislators = legislators_by_zipcode(zipcode)
 
-  form_letter = erb_template.result(binding)
+  #form_letter = erb_template.result(binding)
 
-  save_thank_you_letter(id,form_letter)
+  #save_thank_you_letter(id,form_letter)
 end
