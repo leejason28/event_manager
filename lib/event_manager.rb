@@ -1,6 +1,7 @@
 require 'csv'
 require 'google/apis/civicinfo_v2'
 require 'erb'
+require 'date'
 
 def clean_zipcode(zipcode)
   zipcode.to_s.rjust(5,"0")[0..4]
@@ -51,4 +52,6 @@ contents.each do |row| #commented shit out so its faster when i do assignments
   #form_letter = erb_template.result(binding)
 
   #save_thank_you_letter(id,form_letter)
+  phone_number = row[:homephone].to_s.gsub(/\p{^Alnum}/, "")
+  puts "#{phone_number}"
 end
