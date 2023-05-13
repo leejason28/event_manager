@@ -32,6 +32,20 @@ def save_thank_you_letter(id,form_letter)
   end
 end
 
+def clean_phone_number(phone_number)
+  if phone_number.length < 10 || phone_number.length > 11
+    phone_number = 'x'
+  elsif phone_number.length == 11
+    if phone_number[0] == 1
+      phone_number = phone_number[1..-1]
+    else
+      phone_number = 'x'
+    end
+  else
+    phone_number
+  end
+end
+
 puts 'EventManager initialized.'
 
 contents = CSV.open(
@@ -52,6 +66,8 @@ contents.each do |row| #commented shit out so its faster when i do assignments
   #form_letter = erb_template.result(binding)
 
   #save_thank_you_letter(id,form_letter)
-  phone_number = row[:homephone].to_s.gsub(/\p{^Alnum}/, "")
+
+  #phone_number = clean_phone_number(row[:homephone].to_s.gsub(/\p{^Alnum}/, ""))
+
   puts "#{phone_number}"
 end
