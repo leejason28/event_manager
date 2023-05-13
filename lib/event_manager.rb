@@ -77,6 +77,12 @@ def clean_time(date_time)
   return Time.new(year,month,date,hour,min)
 end
 
+def peak_day(days)
+  weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  ind = days.max_by { |i| days.count(i) }
+  weekdays[ind]
+end
+
 puts 'EventManager initialized.'
 
 contents = CSV.open(
@@ -108,7 +114,12 @@ contents.each do |row| #commented shit out so its faster when i do assignments
 end
 
 hours = []
+dates = []
 times.each do |time|
   hours.push(time.hour)
+  dates.push(Date.new(time.year, time.month, time.day).wday)
 end
-puts "#{peak_hour(hours)}"
+
+time_target = peak_hour(hours)
+
+day_target = peak_day(dates)
